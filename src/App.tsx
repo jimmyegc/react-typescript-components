@@ -1,9 +1,9 @@
 /* import { Button } from "./components/ui/Button";
 import { Input } from "./components/ui/Input";
 import { Label } from "./components/ui/Label"; */
-import { Label, Input, Button } from "./components/ui";
-
 import { useState } from "react";
+import { Label, Input, Button, List } from "./components/ui";
+import { data as users } from "./users";
 
 const useMyHook = (initialState = false) => {
   const [active, setActive] = useState(initialState);
@@ -19,6 +19,10 @@ const useMyHook = (initialState = false) => {
 
 function App() {
   const { active, handleToggle } = useMyHook();
+
+  const handleNext = () => {
+    alert("siguiente");
+  };
   return (
     <>
       <h2>Custom Hooks</h2>
@@ -27,8 +31,18 @@ function App() {
         {active.toString()}
         <ShowInfo />
       </div>
-
+      <br />
+      <h2>Lista</h2>
+      <br />
       <h2>UI</h2>
+      <List
+        items={users}
+        renderItem={(item) => item.name}
+        extractKey={(item) => item.id}
+      />
+      <br />
+      <button onClick={() => console.log("Next...")}>Siguiente</button>
+      <button onClick={handleNext}>NEXT</button>
       <form action="" className="container mx-auto">
         <div className="mt-2">
           <Label htmlFor="email">Correo Electrónico</Label>
